@@ -12,6 +12,18 @@ public class SetupLocalPlayer : NetworkBehaviour {
 	[SyncVar (hook= "OnChangeName")] public string pName = "player";
 	[SyncVar (hook= "OnChangeColour")] public string pColour = "#ffffff";
 
+	public override void OnStartClient() 
+	{
+		base.OnStartClient();
+		Invoke("UpdateStates", 1); 
+	}
+
+	void UpdateStates()
+	{
+		OnChangeName(pName);
+		OnChangeColour(pColour); 
+	}
+
 	void OnChangeColour(string n)
 	{
 		pColour = n;
